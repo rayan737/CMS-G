@@ -1,0 +1,113 @@
+﻿@model CMSG.Models.EmployeeVM
+@{
+    ViewData["Title"] = "User Details";
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <title>Rahal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="~/Rahal/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+
+</head>
+<body id="top">
+
+
+
+    <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">Back To Trips</a>
+
+
+    <h2>Trip Details</h2>
+
+    <form asp-controller="Employee" asp-action="Delete" method="post" class="form-group">
+
+        <label asp-for="Name">Employee Name</label>
+        <input type="text" asp-for="Name" disabled class="form-control" />
+        <br /><br />
+
+
+
+        <img src="~/Files/Photos/@Model.PhotoName" width="30" height="30" />
+        <br /><br />
+
+        <h3>
+            <a href="~/Files/Docs/@Model.CvName">Download Cv</a>
+        </h3>
+
+
+
+
+
+
+        <label asp-for="Salary">Employee Salary</label>
+        <input type="text" asp-for="Salary" disabled class="form-control" />
+        <br /><br />
+
+        <label asp-for="Address">Employee Address</label>
+        <input type="text" asp-for="Address" disabled class="form-control" />
+        <br /><br />
+
+        <label asp-for="Email">Employee Email</label>
+        <input type="email" asp-for="Email" disabled class="form-control" />
+        <br /><br />
+
+
+        <label asp-for="HireDate">Hire Date</label>
+        <input type="text" asp-for="HireDate" disabled class="form-control" />
+        <br /><br />
+
+
+        <label asp-for="Notes">Notes</label>
+        <textarea asp-for="Notes" disabled class="form-control" rows="4"></textarea>
+        <br /><br />
+
+
+        <label asp-for="DepartmentId">Department</label>
+        <select asp-for="DepartmentId" disabled asp-items="@(SelectList)ViewBag.DepartmentList">
+            <option>Choose Department</option>
+        </select>
+        <br /><br />
+
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" disabled asp-for="IsActive" class="custom-control-input">
+            <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
+        </div>
+
+        <br />
+
+
+    </form>
+
+    <h2>Welcomt To Your Mail</h2>
+
+
+
+    <h3 style="color:red">
+        @TempData["msg"]        @*// TempData["msg"] to send from an action to another action view  // sent from action "SendMail"*@
+    </h3>
+
+    <form action="/User/SendMail" method="post" class="form-group">
+
+
+        <label>Title</label>
+        <input type="text" name="Title" class="form-control" />      @*name="Title" because in action params	// if from model , then asp-for*@
+        <br />
+
+        <label>Message</label>
+        <textarea name="Message" class="form-control" rows="4"></textarea>
+        <br />
+
+        <input type="submit" value="Send" class="btn btn-primary" />
+
+    </form>
+
+
+
+    <script src="~/Rahal/layout/scripts/jquery.min.js"></script>
+    <script src="~/Rahal/layout/scripts/jquery.backtotop.js"></script>
+    <script src="~/Rahal/layout/scripts/jquery.mobilemenu.js"></script>
+</body>
+</html>

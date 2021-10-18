@@ -1,0 +1,54 @@
+﻿@model IQueryable<CMSG.Models.EmployeeVM>
+@{
+    ViewBag.Title = "Employee";
+}
+
+<h2>Welcome To Employee</h2>
+
+<a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Add Employee</a>
+
+<table class="table table-striped table-bordered text-center">
+    <tr>
+        <th class="text-center">Name</th>
+        <th class="text-center">Salary</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Hire Date</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Is Active</th>
+        <th class="text-center">Notes</th>
+        <th class="text-center">Photo</th>
+        <th class="text-center">Cv</th>
+        <th class="text-center">Department</th>
+        <th class="text-center">Edit</th>
+        <th class="text-center">Delete</th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    @*<td>@item.Id</td>*@
+    <td>@item.Name</td>
+    <td>@item.Salary</td>
+    <td>
+        <img src="~/Files/Photos/@item.PhotoName" width="30" height="30" />
+    </td>
+    <td>
+        <a href="~/Files/Docs/@item.CvName">Download Cv</a>
+    </td>
+    <td>@item.Address</td>
+    <td>@item.IsActive</td>
+    <td>@item.HireDate.Date.ToShortDateString()</td>
+    <td>@item.Email</td>
+    <td>@item.Notes</td>
+    <td>@item.DepartmentId</td>
+
+    <td><a asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a></td>
+    <td><a asp-controller="Employee" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a></td>
+    <td><a asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a></td>
+</tr>
+    }
+
+</table>
